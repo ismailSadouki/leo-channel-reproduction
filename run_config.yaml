@@ -1,0 +1,32 @@
+# Experiment configuration
+# Every numerical result must be reproducible from this file.
+
+experiment:
+  id: "m0_example"
+  description: ""
+
+satellite:
+  name: ""
+  tle:
+    line1: ""
+    line2: ""
+    epoch: ""
+
+ground_station:
+  name: ""
+  latitude_deg: 0.0
+  longitude_deg: 0.0
+  height_m: 0.0
+
+carrier:
+  frequency_hz: 2.0e9
+
+environment:
+  scene_id: ""
+  ray_tracer: ""
+
+weather:
+  enabled: false
+  rain_rate_mm_h: 0.0
+
+notes: ""
