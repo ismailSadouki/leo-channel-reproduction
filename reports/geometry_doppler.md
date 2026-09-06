@@ -176,13 +176,12 @@ geometry.
 
 ## Outputs
 
-The following artifacts are generated:
+![alt text](azimuth_pass.png)
+![alt text](elevation_pass.png)
+![alt text](range_pass.png)
+![alt text](doppler_pass.png)
 
-- `elevation_pass.png`
-- `range_pass.png`
-- `azimuth_pass.png`
-- `doppler_pass.png`
-- `pass_data.csv`
+
 
 The CSV contains one row per 1-second sample with:
 
