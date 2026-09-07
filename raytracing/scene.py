@@ -2,6 +2,12 @@ import mitsuba as mi
 mi.set_variant("cuda_ad_rgb")
 from sionna.rt import Camera, Receiver, load_scene_from_string
 
+
+import numpy as np
+from incidence import elevation_azimuth_to_incidence
+from sionna.rt import Transmitter
+
+
 def build_scene():
     """
     Build a small urban scene.
@@ -89,6 +95,37 @@ def build_scene():
     )
 
     scene.add(receiver)
+
+
+    #Equivalent far-field transmitter
+    elevation_deg = 10.0
+    azimuth_deg = 90.0
+
+    incidence = elevation_azimuth_to_incidence(
+        elevation_deg,
+        azimuth_deg,
+    )
+
+    scene_center = np.array([0.0, 0.0, 0.0])
+    far_field_distance = 50_000.0  # meters
+
+    tx_position = (
+        scene_center
+        - far_field_distance * incidence
+    )
+
+    transmitter = Transmitter(
+        name="tx",
+        position=mi.Point3f(*tx_position.tolist()),
+        look_at=mi.Point3f(*scene_center.tolist()),
+        power_dbm=44,
+    )
+
+    scene.add(transmitter)
+
+    print("incidence direction:", incidence)
+    print("equivalent TX position:", tx_position)
+    print("TX distance:", np.linalg.norm(tx_position))
 
     return scene
 
